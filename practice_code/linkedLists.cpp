@@ -22,7 +22,7 @@ void insertAtEnd(int value){
     newNode -> data = value;        //assign value to data.
     newNode -> next = nullptr;      //last node points to null.
 
-    if (head == nullptr){
+    if (head == nullptr){ // if there's no node.
         head = newNode;
     }
     else{
@@ -55,9 +55,29 @@ void deleteAtBeginning(){
         return;
     }
     Node *temp = head;
-    head = head -> next; //move temporaty head to next node in line.
+    head = head -> next; //move temporary head to next node in line.
     cout << "Deleted " << temp -> data << " from the beginning.\n";
     delete temp;
+}
+
+void deleteAtEnd() {
+    if (head == nullptr){ // list has no node, head is null pointer.
+        cout << "List is already empty.\n";
+        return;
+    }
+    if (head -> next == nullptr){ // If there's only one node 
+        cout << "Deleted " << head -> data << " from the end.\n";
+        delete head;
+        head = nullptr;
+        return;
+    }
+    Node *temp = head;
+    while (temp -> next -> next != nullptr) { //Transverse to second last
+        temp = temp -> next;
+    }
+    cout << "Deleted " << temp -> next -> data << " from the end";
+    delete temp -> next;    // delete last node.
+    temp -> next = nullptr;
 }
 
 int main(){
